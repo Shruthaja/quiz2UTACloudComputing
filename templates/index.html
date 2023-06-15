@@ -24,36 +24,19 @@
 </div>
 <div style="margin-top:3%;">
     <form action="/" method="post">
-        <label>Press Button to list all earthquakes with magnitude greater than 5! </label><br>
+        <label>Enter City Name </label><br>
+        <input name="cityname" type="text" placeholder="Enter City Name">
         <input style="margin-top:2%" type="submit" placeholder="Click me!">
     </form>
     <div style="margin-top:3%;">
         <table id="example" class="display" style="font-size:9px">
             <thead>
-            <tr>
-                <th>time</th>
-                <th> latitude</th>
-                <th>longitude</th>
-                <th>depth</th>
-                <th>mag</th>
-                <th>magType</th>
-                <th>nst</th>
-                <th>gap</th>
-                <th>dmin</th>
-                <th>rms</th>
-                <th>net</th>
-                <th>id</th>
-                <th>updated</th>
-                <th>place</th>
-                <th>type</th>
-                <th>horizontalError</th>
-                <th>depthError</th>
-                <th>magError</th>
-                <th>magNst</th>
-                <th>status</th>
-                <th>locationSource</th>
-                <th>[magSource]</th>
-            </tr>
+            <th>city</th>
+
+            <th>State</th>
+            <th>Population</th>
+            <th>lat</th>
+            <th>lon</th>
             </thead>
             <tbody>
             {% for i in result %}
@@ -68,11 +51,37 @@
             </tbody>
         </table>
     </div>
+
+</div>
+<div style="margin-top:3%;">
+    <table id="example2" class="display" style="font-size:9px">
+        <thead>
+        <th>city</th>
+
+        <th>State</th>
+        <th>Population</th>
+        <th>lat</th>
+        <th>lon</th>
+        </thead>
+        <tbody>
+        {% for i in r %}
+        <tr>
+            {% for j in i %}
+            <td>
+                <div class=scrollable>{{j}}</div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <script>
 
 $('#example').DataTable();
+$('#example2').DataTable();
+
 
 
 
