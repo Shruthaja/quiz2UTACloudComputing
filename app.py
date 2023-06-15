@@ -45,5 +45,39 @@ def page2():
         result=cursor.fetchall()
     return render_template("page2.html",result=result)
 
+@app.route('/page3.html', methods=['GET', 'POST'])
+def page3():
+    result=[]
+    cnames=[]
+    minlat=""
+    minlon=''
+    maxlat=''
+    maxlon=''
+    state=''
+    if request.method=="POST":
+        minlat = request.form['lat']
+        minlon = request.form['lon']
+        maxlat = request.form['mlat']
+        maxlon = request.form['mlon']
+        state=request.form['state']
+        min=request.form['min']
+        max=request.form['max']
+        inc=request.form['inc']
+        if(state!=""):
+            query="select * from dbo.city where population>? and population<? and state=?"
+            cursor.execute(query,min,max,state)
+            cnames=cursor.fetchall()
+            query="update city set population=population+? where City in (select City from dbo.city where population>? and population<? and state=?)"
+            cursor.execute(query,inc,min,max,state)
+            cursor.commit()
+        else:
+            query="select * from dbo.city where lat between ? and ? and lon between ? and ? and  population>? and population<?"
+            cursor.execute(query,minlat,maxlat,minlon,maxlon,min,max)
+            cnames = cursor.fetchall()
+            query = "update city set population=population+? where City in (select City from dbo.city where lat between ? and ? and lon between ? and ? and  population>? and population<?)"
+            cursor.execute(query, inc, minlat,maxlat,minlon,maxlon,min,max)
+            cursor.commit()
+    return render_template("page3.html",cnames=cnames)
+
 if __name__ == '__main__':
     app.run(debug=True)
