@@ -79,5 +79,35 @@ def page3():
             cursor.commit()
     return render_template("page3.html",cnames=cnames)
 
+@app.route('/page4.html', methods=['GET', 'POST'])
+def page4():
+    result = []
+    r=""
+    city=''
+    state=""
+    if request.method == "POST":
+        city=request.form['cityname']
+        state=request.form['statename']
+        if(city!=""):
+            query="delete from city where City=?"
+            cursor.execute(query,city)
+            cursor.commit()
+        else:
+            query = "delete from city where state=?"
+            cursor.execute(query, state)
+            cursor.commit()
+    return render_template("page4.html", result=result, r=r)
+@app.route('/page42.html', methods=['GET', 'POST'])
+def page42():
+    if request.method == "POST":
+        city=request.form['cityname1']
+        state=request.form['statename1']
+        lat=request.form['lat']
+        lon=request.form['lon']
+        pop=request.form['pop']
+        query="insert into city values(?,?,?,?,?)"
+        cursor.execute(query,city,state,pop,lat,lon)
+        cursor.commit()
+    return render_template("page4.html")
 if __name__ == '__main__':
     app.run(debug=True)
