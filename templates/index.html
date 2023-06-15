@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
+    <title>Quiz 2</title>
+</head>
+<body style="background-color:teal;">
+<ul>
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/page2.html">Page2</a></li>
+    <li><a href="/page3.html">Page3</a></li>
+    <li><a href="/page4.html">Page4</a></li>
+    <li><a href="/page5.html">Page5</a></li>
+
+
+</ul>
+<div style="float:right;">
+    <h1>Shruthaja P Rao</h1>
+    <h2>1002118604</h2>
+</div>
+<div style="margin-top:3%;">
+    <form action="/" method="post">
+        <label>Press Button to list all earthquakes with magnitude greater than 5! </label><br>
+        <input style="margin-top:2%" type="submit" placeholder="Click me!">
+    </form>
+    <div style="margin-top:3%;">
+        <table id="example" class="display" style="font-size:9px">
+            <thead>
+            <tr>
+                <th>time</th>
+                <th> latitude</th>
+                <th>longitude</th>
+                <th>depth</th>
+                <th>mag</th>
+                <th>magType</th>
+                <th>nst</th>
+                <th>gap</th>
+                <th>dmin</th>
+                <th>rms</th>
+                <th>net</th>
+                <th>id</th>
+                <th>updated</th>
+                <th>place</th>
+                <th>type</th>
+                <th>horizontalError</th>
+                <th>depthError</th>
+                <th>magError</th>
+                <th>magNst</th>
+                <th>status</th>
+                <th>locationSource</th>
+                <th>[magSource]</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in result %}
+            <tr>
+                {% for j in i %}
+                <td>
+                    <div class=scrollable>{{j}}</div>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+$('#example').DataTable();
+
+
+
+
+
+</script>
+</body>
+</html>
