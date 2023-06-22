@@ -27,8 +27,8 @@ def hello_world():
         query = " select lat , lon from dbo.city where City=? "
         cursor.execute(query, cname)
         lr = cursor.fetchone()
-        query = "SELECT * FROM [dbo].[city] WHERE ( 6371 * ACOS(COS(RADIANS(lat)) * COS(RADIANS(?)) * COS(RADIANS(lon) - RADIANS(?)) + SIN(RADIANS(lat)) * SIN(RADIANS(?)) ))< ?;"
-        cursor.execute(query, lr[0], lr[1], lr[0], 100)
+        query =  "SELECT * FROM [dbo].[city] WHERE ( 6371 * ACOS(COS(RADIANS(lat)) * COS(RADIANS(?)) * COS(RADIANS(lon) - RADIANS(?)) + SIN(RADIANS(lat)) * SIN(RADIANS(?)) ))< 100"
+        cursor.execute(query,lr[0], lr[1], lr[0])
         r = cursor.fetchall()
     return render_template("index.html", result=result, r=r)
 
